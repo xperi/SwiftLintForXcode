@@ -43,23 +43,28 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             let fm = FileManager.default
             let temporaryDirectory = (NSTemporaryDirectory() as NSString)
                 .appendingPathComponent("autocorrect") as NSString
-
+            
             // create temporary directory
             if !fm.fileExists(atPath: temporaryDirectory as String) {
                 try fm.createDirectory(atPath: temporaryDirectory as String,
                                        withIntermediateDirectories: true, attributes: nil)
             }
 
+            let home = FileManager.default.homeDirectoryForCurrentUser
             // create empty .swiftlint.yml in temporary directory
-            let config = temporaryDirectory.appendingPathComponent(".swiftlint.yml")
-            if !fm.fileExists(atPath: config) {
-                try "".write(toFile: config, atomically: true, encoding: .utf8)
-            }
+            let configHome = home.appendingPathComponent(".swiftlint.yml")
+            let configTemp = NSURL.fileURL(withPath: NSTemporaryDirectory(),isDirectory: true).appendingPathComponent("autocorrect").appendingPathComponent(".swiftlint.yml")
 
+            if fm.fileExists(atPath: configTemp.path) {
+                try fm.removeItem(atPath: configTemp.path)
+            }
+            
+            try FileManager.default.copyItem(at: configHome, to: configTemp)
+        
+        
             // create temporary.swift in temporary directory
             let source = temporaryDirectory.appendingPathComponent("temporary.swift")
             try invocation.buffer.completeBuffer.write(toFile: source, atomically: true, encoding: .utf8)
-
             // run autocorrect
             switch invocation.commandIdentifier {
             case "io.github.norio-nomura.SwiftLintForXcode.SwiftLint.autocorrect":

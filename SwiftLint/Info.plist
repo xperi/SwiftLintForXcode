@@ -36,7 +36,7 @@
 					<key>XCSourceEditorCommandIdentifier</key>
 					<string>io.github.norio-nomura.SwiftLintForXcode.SwiftLint.autocorrect</string>
 					<key>XCSourceEditorCommandName</key>
-					<string>Run swiftlint autocorrect</string>
+					<string>Run swiftlint autocorrect10</string>
 				</dict>
 				<dict>
 					<key>XCSourceEditorCommandClassName</key>
