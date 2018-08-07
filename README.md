@@ -19,6 +19,7 @@ SwiftLint for Xcode is a Xcode Extension that was created to run [SwiftLint](htt
 8. Run `~/Applications/SwiftLintForXcode.app` and quit.
 9. Go to System Preferences -> Extensions -> Xcode Source Editor and enable the extension.
 10. Open Xcode and the extension should be found in Editor -> SwiftLint.
+11. Move .swiftlint file to /Users/{User}/Library/Containers/io.github.norio-nomura.SwiftLintForXcode.SwiftLint/Data
 
 ## Author
 
